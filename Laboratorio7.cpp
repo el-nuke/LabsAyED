@@ -121,7 +121,7 @@ Ejercicio número 4
 Cree un la función de eliminar un nodo del árbol.
 */
 
-void deleteNode(Node* root, int value)
+void deleteNode(Node* root, int value) //Not really sure bout this one
 {
     if (root == NULL){
         return;
@@ -153,14 +153,12 @@ Node* createTree(){
 }
 
 Node* insertTree(){
-
+    //???
 }
 
 Node* printTree(){
-
+    //???
 }
-
-
 
 /*
 Debe entregar además
@@ -169,8 +167,55 @@ laboratorio. Debe considerar una correcta validación para no tener errores al
 momento de ingresar información por parte del usuario.
 */
 
-
-
 int main(){
+    int input, res;
+    bool loop=true;
 
+    Node* root;
+    root = createTree();
+    cout << "-- Root generated --" << endl;
+
+    do
+    {
+        cout << "1: Insert node \n2: Find a specific value \n3: Find lowest value \n4: Find highest value \n5: Quit";
+        switch (input)
+        {
+        case 1:
+            userInsertNode(root);
+            break;
+
+        case 2:
+            cout << "Enter a value to search: ";
+            cin >> input;
+            if (findValue(root, input)){
+                cout << "Found " << input << " within the tree!" << endl;
+            }else{
+                cout << "Couldn't find " << input << "..." << endl;
+            }
+            break;
+
+        case 3:
+            res = findLowestValue(root);
+            if (res != -1337){
+                cout << "Lowest value is " << res << "!" << endl;
+            };
+            break;
+
+        case 4:
+            res = findHighestValue(root);
+            if (res != -1337){
+                cout << "Highest value is " << res << "!" << endl;
+            };
+            break;
+
+        case 5:
+            loop = false;
+            break;
+        
+        default:
+            break;
+        }
+    } while (loop);
+    
+    return 0;
 }
