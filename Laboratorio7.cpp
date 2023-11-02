@@ -25,11 +25,7 @@ Node* createNode(int data){
 Node* insertNode(Node* root, int value){
     
     if (root == NULL){
-        root = new Node;
-        root->data = value;
-        root->left = NULL;
-        root->right = NULL;
-        return root;
+        return NULL;
     }
 
     if (value < root->data){
@@ -42,12 +38,12 @@ Node* insertNode(Node* root, int value){
 }
 
 void printNode(Node* root) {
-    if (root == NULL) {
-        return;
+    if (root)
+    {
+        printNode(root->left);
+        cout << root->data << " ";
+        printNode(root->right);
     }
-    printNode(root->left);
-    cout << root->data << " ";
-    printNode(root->right);
 }
 
 /*
@@ -121,7 +117,7 @@ Ejercicio número 4
 Cree un la función de eliminar un nodo del árbol.
 */
 
-void deleteNode(Node* root, int value) //Not really sure bout this one
+void deleteNode(Node* root, int value) //Not really sure if this really works
 {
     if (root == NULL){
         return;
@@ -145,10 +141,11 @@ Crear una estructura para implementar un árbol General y las funciones de crear
 insertar e imprimir el árbol.
 */
 
-Node* createTree(){
-    Node* root;
-    root = insertNode(root, 50);
-
+Node* createTree(int value){
+    Node* root = new Node;
+    root->data = value;
+    root->left = NULL;
+    root->right = NULL;
     return root;
 }
 
@@ -171,20 +168,32 @@ int main(){
     int input, res;
     bool loop=true;
 
-    Node* root;
-    root = createTree();
-    cout << "-- Root generated --" << endl;
+    Node* root = createTree(50);
+    cout << " -- root generated -- " << endl;
 
     do
     {
-        cout << "1: Insert node \n2: Find a specific value \n3: Find lowest value \n4: Find highest value \n5: Quit";
+        cout << "\n\n1: Print from root" << endl;
+        cout << "2: Create and insert node" << endl;
+        cout << "3: Find a value" << endl;
+        cout << "4: Find lowest value" << endl;
+        cout << "5: Find highest value" << endl;
+        cout << "9: Quit" << endl;
+        cout << "\n\n Input: ";
+        cin >> input;
+
         switch (input)
         {
         case 1:
+            printNode(root);
+            cout << "\n" << endl;
+            break;
+        
+        case 2:
             userInsertNode(root);
             break;
 
-        case 2:
+        case 3:
             cout << "Enter a value to search: ";
             cin >> input;
             if (findValue(root, input)){
@@ -194,21 +203,21 @@ int main(){
             }
             break;
 
-        case 3:
+        case 4:
             res = findLowestValue(root);
             if (res != -1337){
                 cout << "Lowest value is " << res << "!" << endl;
             };
             break;
 
-        case 4:
+        case 5:
             res = findHighestValue(root);
             if (res != -1337){
                 cout << "Highest value is " << res << "!" << endl;
             };
             break;
 
-        case 5:
+        case 9:
             loop = false;
             break;
         
