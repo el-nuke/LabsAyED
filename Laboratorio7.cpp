@@ -12,25 +12,30 @@ struct Node
     int data;
     Node* left;
     Node* right;
+
+    Node(int val){
+        data = val;
+        left = nullptr;
+        right = nullptr;
+    }
+
 };
 
 Node* createNode(int data){
-    Node* newNode = new Node;
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
+    Node* newNode = new Node(data);
     return newNode;
 }
 
 Node* insertNode(Node* root, int value){
     
-    if (root == NULL){
-        return NULL;
+    if (root == nullptr){
+        return createNode(value);
     }
 
-    if (value < root->data){
+    if (value <= root->data){
         root->left = insertNode(root->left, value);
-    }else{
+    }
+    if (value > root->data){
         root->right = insertNode(root->right, value);
     }
 
@@ -61,6 +66,8 @@ void userInsertNode(Node* root){
     cout << "Number inserted succesfully!";
 }
 
+
+
 /*
 Ejercicio número 3
 Crear las siguientes funciones de búsqueda en el árbol: buscar valor, buscar valor
@@ -69,7 +76,7 @@ mínimo y buscar valor máximo.
 
 bool findValue(Node* root, int value)
 {
-    if (root == NULL){
+    if (root == nullptr){
         return false;
     }
 
@@ -86,12 +93,12 @@ bool findValue(Node* root, int value)
 
 int findLowestValue(Node* root)
 {
-    if (root == NULL){
+    if (root == nullptr){
         cout << "Tree is empty!" << endl;
         return -1337;
     }
 
-    while (root->left != NULL){
+    while (root->left != nullptr){
         root = root->left;
     }
 
@@ -100,12 +107,12 @@ int findLowestValue(Node* root)
 
 int findHighestValue(Node* root)
 {
-    if (root == NULL){
+    if (root == nullptr){
         cout << "Tree is empty!" << endl;
         return -1337;
     }
 
-    while (root->right != NULL){
+    while (root->right != nullptr){
         root = root->right;
     }
 
@@ -119,12 +126,12 @@ Cree un la función de eliminar un nodo del árbol.
 
 void deleteNode(Node* root, int value) //Not really sure if this really works
 {
-    if (root == NULL){
+    if (root == nullptr){
         return;
     }
 
     if (root->data == value){
-        root = NULL;        
+        root = nullptr;        
         return;
     }
 
@@ -140,7 +147,7 @@ Ejercicio número 5
 Crear una estructura para implementar un árbol General y las funciones de crear,
 insertar e imprimir el árbol.
 */
-
+/*
 Node* createTree(int value){
     Node* root = new Node;
     root->data = value;
@@ -148,6 +155,7 @@ Node* createTree(int value){
     root->right = NULL;
     return root;
 }
+*/
 
 Node* insertTree(){
     //???
@@ -168,13 +176,13 @@ int main(){
     int input, res;
     bool loop=true;
 
-    Node* root = createTree(50);
+    Node* root = createNode(50);
     cout << " -- root generated -- " << endl;
 
     do
     {
         cout << "\n\n1: Print from root" << endl;
-        cout << "2: Create and insert node" << endl;
+        cout << "2: Insert value as node" << endl;
         cout << "3: Find a value" << endl;
         cout << "4: Find lowest value" << endl;
         cout << "5: Find highest value" << endl;
@@ -222,6 +230,7 @@ int main(){
             break;
         
         default:
+        cout << "ye";
             break;
         }
     } while (loop);
